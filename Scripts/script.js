@@ -1,4 +1,4 @@
-
+// this file contains custom Javascript 
 var webstore = new Vue({
     el: '#app',
     data: {
