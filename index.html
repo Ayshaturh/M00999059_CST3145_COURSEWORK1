@@ -107,5 +107,65 @@
                         <button v-html="lessonButton" disabled v-else></button>
                     </div>
                 </div>
+                 <!-- Sorts by name A to Z -->
+            <div v-else-if="sortStyle === 'aToZ'">
+                <div v-for="product in alphabetProducts" class="lesson">
+                    <img class="lessonImage" v-bind:src="product.image">
+                    <h2>Subject: {{product.name}}</h2>
+                    <p>Location: {{product.location}}</p>
+                    <p>Price: £{{product.price}}</p>
+                    <p>Spaces available: {{product.spaces}}</p>
+                    <button v-html="lessonButton" v-on:click="addToCart(product)" v-if="canAdd(product)"></button>
+                    <button v-html="lessonButton" disabled v-else></button>
+                </div>
+            </div>
+            <!-- Sorts by name Z to A -->
+            <div v-else-if="sortStyle === 'zToA'">
+                <div v-for="product in alphabetProductsZ" class="lesson">
+                    <img class="lessonImage" v-bind:src="product.image">
+                    <h2>Subject: {{product.name}}</h2>
+                    <p>Location: {{product.location}}</p>
+                    <p>Price: £{{product.price}}</p>
+                    <p>Spaces available: {{product.spaces}}</p>
+                    <button v-html="lessonButton" v-on:click="addToCart(product)" v-if="canAdd(product)"></button>
+                    <button v-html="lessonButton" disabled v-else></button>
+                </div>
+            </div>
+        </div>
+        <!-- Shows checkout page if showProduct is false -->
+        <div class="checkout" v-else>
+            <h2 class="pageHeader">Shopping Cart</h2>
+            <!-- Loops through the products and if they match the ID in the cart it shows it on this page as well as their frequency -->
+            <div v-for="product in cartItems" class="lesson">
+                <img class="lessonImage" v-bind:src="product.image">
+                <h2>Subject: {{product.name}}</h2>
+                <p>Location: {{product.location}}</p>
+                <p>Price: £{{product.price}}</p>
+                <p>Spaces available: {{product.spaces}}</p>
+                <button @click="removeFromCart(product)">Remove</button>
+            </div>
+             <!-- Creates fields for the user to type their details -->
+             <div class="basket">
+                <p>
+                    First Name:
+                    <input class="inputField" v-model="order.firstName" />
+                </p>
+                <p>
+                    Last Name:
+                    <input class="inputField" v-model="order.lastName" />
+                </p>
+                <p>
+                    Phone Number:
+                    <input v-model="order.phoneNo" />
+                </p>
+                <!-- Button is disabled if any fields are empty or don't match the RegEx -->
+                <button :disabled="!emptyFields" @click="placeOrder">Place Order</button>
+            </div>
+
+        </div>
+    </div>
+    <script src="Scripts/products.js"></script>
+    <script src="Scripts/script.js"></script>
 </body>
+
 </html>
