@@ -1,6 +1,6 @@
 
 // List of products to be displayed
-
+// this file returns JSON objects of products to be displayed in the frontend
 products = [
     {
         id: 1001,
